@@ -226,12 +226,12 @@ $title               = 'MiniManager for TrinityCore';
 $itemperpage         =  25;
 $showcountryflag     =  true;
 
-$theme               = 'Sulfur';    // file/folder name of theme to use from themes directory by default
-$language            = 'english';   // default site language
-$timezone            = 'UTC';       // default timezone (use your local timezone code) https://www.php.net/manual/en/timezones.php
-$gm_online           = '1';         // display GM Characters in the Online Character List and Player Map (1 = enable, 0 = disable)
-$gm_online_count     = '1';         // include GM Characters in the Online User Count and Player Map (1 = enable, 0 = disable)
-$motd_display_poster = '1';         // display the poserter info in the MOTD (1 = enable, 0 = disable)
+$theme               = 'trinity-aquamarine';    // file/folder name of theme to use from themes directory by default
+$language            = 'english';               // default site language
+$timezone            = 'UTC';                   // default timezone (use your local timezone code) https://www.php.net/manual/en/timezones.php
+$gm_online           = '1';                     // display GM Characters in the Online Character List and Player Map (1 = enable, 0 = disable)
+$gm_online_count     = '1';                     // include GM Characters in the Online User Count and Player Map (1 = enable, 0 = disable)
+$motd_display_poster = '1';                     // display the poserter info in the MOTD (1 = enable, 0 = disable)
 
 
 //#############################################################################

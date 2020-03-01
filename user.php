@@ -266,7 +266,7 @@ function browse_users(&$sqlr, &$sqlc)
                 $output .= '
                                 <td>***@***.***</td>';
             $output .= '
-                                <td class="small">'.$data['joindate'].'</td>';
+                                <td class="td-no-wrap">'.$data['joindate'].'</td>';
             if (($user_lvl >= $action_permission['update'])||($user_name === $data['username']))
                 $output .= '
                                 <td><a href="https://www.ip2location.com/demo/'.$data['last_ip'].'" target="_blank" rel="noopener noreferrer">'.$data['last_ip'].'</a></td>';
@@ -276,7 +276,7 @@ function browse_users(&$sqlr, &$sqlc)
             $output .= '
                                 <td>'.(($data['failed_logins']) ? $data['failed_logins'] : '-').'</td>
                                 <td>'.(($data['locked']) ? $lang_global['yes_low'] : '-').'</td>
-                                <td class="small">'.$data['last_login'].'</td>
+                                <td class="td-no-wrap">'.$data['last_login'].'</td>
                                 <td>'.(($data['online']) ? '<img src="img/up.gif" alt="" />' : '-').'</td>';
 
             $output .= '

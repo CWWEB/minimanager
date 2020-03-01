@@ -81,7 +81,7 @@ function bbcode_add_editor()
   $bbcode_emoticons = bbcode_emoticons();
   $output .= "
         <script type=\"text/javascript\" src=\"libs/js/bbcode.js\"></script>
-        <div style=\"display:block\">
+        <div style=\"display:inline-block\">
           <select>
             <option>".$bbcode_fonts[0]."</option>";
   for($i=1;$i<count($bbcode_fonts);$i++)
@@ -121,7 +121,7 @@ function bbcode_add_editor()
           <img src=\"img/editor/code.gif\" onclick=\"addbbcode('msg','code')\" width=\"21\" height=\"20\" style=\"cursor:pointer;\" alt=\"\" />
           <img src=\"img/editor/quote.gif\" onclick=\"add_quote('msg')\" width=\"21\" height=\"20\" style=\"cursor:pointer;\" alt=\"\" />
         </div>
-        <div style=\"display:block;padding-top:5px;\">";
+        <div style=\"display:inline-block;padding-top:5px;\">";
   for($i=0;$i<count($bbcode_emoticons);$i++)
   {
     $output .= "

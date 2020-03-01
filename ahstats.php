@@ -214,13 +214,12 @@ function browse_auctions(&$sqlr, &$sqlc)
                                     </td>
                                     <td>";
 
-    makebutton($lang_global['search'], "javascript:do_submit()",80);
+    makebutton($lang_global['search'], "javascript:do_submit()",130);
 
     $output .= "
                                     </td>
                                     <td>";
-
-    (($search_by && $search_value) || ($search_class != -1) || ($search_quality != -1)) ? makebutton($lang_global['back'], "javascript:window.history.back()",80) : $output .= "";
+    makebutton($lang_global['back'], "javascript:window.history.back()", 130);
 
     $output .= "
                                     </td>

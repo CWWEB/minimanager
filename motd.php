@@ -15,7 +15,7 @@ function add_motd(&$sqlm)
     $output .= '
                 <center>
                     <form action="motd.php?action=do_add_motd" method="post" name="form">
-                        <table class="top_hidden">
+                        <table class="top_hidden" style="text-align: center;">
                             <tr>
                                 <td colspan="3">';
     bbcode_add_editor();

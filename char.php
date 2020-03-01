@@ -217,7 +217,7 @@ function char_main(&$sqlr, &$sqlc)
                             </ul>
                         </div>
                         <div id="tab_content2">
-                            <table class="lined" style="width: 580px;">
+                            <table class="lined no-border" style="width: 580px;">
                                 <tr>
                                     <td colspan="2">
                                         <div>

@@ -325,13 +325,13 @@ function browse_chars(&$sqlr, &$sqlc)
                                 <td>$char[12]</td>";
             }
             $output .= "
-                                <td><img src='img/c_icons/{$char[3]}-{$char[9]}.gif' onmousemove='toolTip(\"".char_get_race_name($char[3])."\",\"item_tooltip\")' onmouseout='toolTip()' alt=\"\" /></td>
-                                <td><img src='img/c_icons/{$char[4]}.gif' onmousemove='toolTip(\"".char_get_class_name($char[4])."\",\"item_tooltip\")' onmouseout='toolTip()' alt=\"\" /></td>
+                                <td><img class=\"char-icon\" src='img/c_icons/{$char[3]}-{$char[9]}.gif' onmousemove='toolTip(\"".char_get_race_name($char[3])."\",\"item_tooltip\")' onmouseout='toolTip()' alt=\"\" /></td>
+                                <td><img class=\"char-icon\" src='img/c_icons/{$char[4]}.gif' onmousemove='toolTip(\"".char_get_class_name($char[4])."\",\"item_tooltip\")' onmouseout='toolTip()' alt=\"\" /></td>
                                 <td>".char_get_level_color($char[8])."</td>
-                                <td class=\"small\"><span onmousemove='toolTip(\"MapID:".$char[6]."\",\"item_tooltip\")' onmouseout='toolTip()'>".get_map_name($char[6], $sqlm)."</span></td>
-                                <td class=\"small\"><span onmousemove='toolTip(\"ZoneID:".$char[5]."\",\"item_tooltip\")' onmouseout='toolTip()'>".get_zone_name($char[5], $sqlm)."</span></td>
-                                <td class=\"small\"><a href=\"guild.php?action=view_guild&amp;error=3&amp;id=$char[11]\">".htmlentities($guild_name[0])."</a></td>
-                                <td class=\"small\">$lastseen</td>
+                                <td><span onmousemove='toolTip(\"MapID:".$char[6]."\",\"item_tooltip\")' onmouseout='toolTip()'>".get_map_name($char[6], $sqlm)."</span></td>
+                                <td><span onmousemove='toolTip(\"ZoneID:".$char[5]."\",\"item_tooltip\")' onmouseout='toolTip()'>".get_zone_name($char[5], $sqlm)."</span></td>
+                                <td><a href=\"guild.php?action=view_guild&amp;error=3&amp;id=$char[11]\">".htmlentities($guild_name[0])."</a></td>
+                                <td class=\"td-no-wrap\">$lastseen</td>
                                 <td>".(($char[7]) ? "<img src=\"img/up.gif\" alt=\"\" />" : "-")."</td>";
             if ($showcountryflag)
             {
@@ -352,7 +352,7 @@ function browse_chars(&$sqlr, &$sqlc)
                                 <td>You</td>
                                 <td>Have</td>
                                 <td>No</td>
-                                <td class=\"small\">Permission</td>
+                                <td>Permission</td>
                                 <td>to</td>
                                 <td>View</td>
                                 <td>this</td>

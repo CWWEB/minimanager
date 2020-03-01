@@ -86,7 +86,7 @@ function browse_guilds(&$sqlr, &$sqlc)
                                 <td><img src=\"img/".($data[4]==0 ? "alliance" : "horde")."_small.gif\" alt=\"\" /></td>
                                 <td>$data[5]/$data[6]</td>
                                 <td>".htmlentities($data[7])." ...</td>
-                                <td class=\"small\">".date('o-m-d', $data[8])."</td>
+                                <td>".date('o-m-d', $data[8])."</td>
                             </tr>";
         }
         unset($data);

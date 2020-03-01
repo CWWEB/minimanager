@@ -84,8 +84,6 @@ function browse_teams()
             <table class=\"top_hidden\">
                 <tr>
                     <td>";
-
-    makebutton($lang_global['back'], "javascript:window.history.back()", 130);
     ($search_by &&  $search_value) ? makebutton($lang_arenateam['arenateams'], "arenateam.php", 130) : $output .= "";
 
     $output .= "
@@ -108,7 +106,11 @@ function browse_teams()
                                 </td>
                                 <td>";
 
-    makebutton($lang_global['search'], "javascript:do_submit()",80);
+    makebutton($lang_global['search'], "javascript:do_submit()",130);
+$output .= "
+                                </td>
+                                <td>";
+    makebutton($lang_global['back'], "javascript:window.history.back()", 130);
 
     $output .= "
                                 </td>

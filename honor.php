@@ -28,9 +28,9 @@ $output .= "
                     answerbox.btn_cancel='{$lang_global['no']}';
                 </script>
                 <center>
-                    <fieldset style=\"width: 776px;\">
+                    <fieldset>
                         <legend><img src='img/alliance.gif' /></legend>
-                        <table class=\"lined\" style=\"width: 705px;\">
+                        <table class=\"lined\">
                             <tr class=\"bold\">
                                 <td colspan=\"11\">{$lang_honor['allied']} {$lang_honor ['browse_honor']}</td>
                             </tr>
@@ -55,8 +55,8 @@ while ($char = $sql->fetch_row($query))
     $output .= "
                             <tr>
                                 <td><a href=\"char.php?id=$char[0]\">$charname</a></td>
-                                <td><img src='img/c_icons/{$char[2]}-{$char[9]}.gif' onmousemove='toolTip(\"".char_get_race_name($char[2])."\",\"item_tooltip\")' onmouseout='toolTip()'></td>
-                                <td><img src='img/c_icons/{$char[3]}.gif' onmousemove='toolTip(\"".char_get_class_name($char[3])."\",\"item_tooltip\")' onmouseout='toolTip()'></td>
+                                <td><img class=\"char-icon\" src='img/c_icons/{$char[2]}-{$char[9]}.gif' onmousemove='toolTip(\"".char_get_race_name($char[2])."\",\"item_tooltip\")' onmouseout='toolTip()'></td>
+                                <td><img class=\"char-icon\" src='img/c_icons/{$char[3]}.gif' onmousemove='toolTip(\"".char_get_class_name($char[3])."\",\"item_tooltip\")' onmouseout='toolTip()'></td>
                                 <td>".char_get_level_color($char[6])."</td>
                                 <td><span onmouseover='toolTip(\"".char_get_pvp_rank_name($char[4], char_get_side_id($char[2]))."\",\"item_tooltip\")' onmouseout='toolTip()' style='color: white;'><img src='img/ranks/rank".char_get_pvp_rank_id($char[4], char_get_side_id($char[2])).".gif'></span></td>
                                 <td>$char[4]</td>
@@ -85,9 +85,9 @@ $output .= "
                     answerbox.btn_cancel='{$lang_global['no']}';
                 </script>
                 <center>
-                    <fieldset style=\"width: 776px;\">
+                    <fieldset>
                         <legend><img src='img/horde.gif' /></legend>
-                        <table class=\"lined\" style=\"width: 705px;\">
+                        <table class=\"lined\">
                             <tr class=\"bold\">
                                 <td colspan=\"11\">{$lang_honor['horde']} {$lang_honor ['browse_honor']}</td>
                             </tr>
@@ -111,8 +111,8 @@ while ($char = $sql->fetch_row($query))
     $output .= "
                             <tr>
                                 <td><a href=\"char.php?id=$char[0]\">$charname</a></td>
-                                <td><img src='img/c_icons/{$char[2]}-{$char[9]}.gif' onmousemove='toolTip(\"".char_get_race_name($char[2])."\",\"item_tooltip\")' onmouseout='toolTip()'></td>
-                                <td><img src='img/c_icons/{$char[3]}.gif' onmousemove='toolTip(\"".char_get_class_name($char[3])."\",\"item_tooltip\")' onmouseout='toolTip()'></td>
+                                <td><img class=\"char-icon\" src='img/c_icons/{$char[2]}-{$char[9]}.gif' onmousemove='toolTip(\"".char_get_race_name($char[2])."\",\"item_tooltip\")' onmouseout='toolTip()'></td>
+                                <td><img class=\"char-icon\" src='img/c_icons/{$char[3]}.gif' onmousemove='toolTip(\"".char_get_class_name($char[3])."\",\"item_tooltip\")' onmouseout='toolTip()'></td>
                                 <td>".char_get_level_color($char[6])."</td>
                                 <td><span onmouseover='toolTip(\"".char_get_pvp_rank_name($char[4], char_get_side_id($char[2]))."\",\"item_tooltip\")' onmouseout='toolTip()' style='color: white;'><img src='img/ranks/rank".char_get_pvp_rank_id($char[4], char_get_side_id($char[2])).".gif'></span></td>
                                 <td>$char[4]</td>

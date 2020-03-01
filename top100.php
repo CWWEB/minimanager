@@ -85,7 +85,7 @@ function top100($realmid, &$sqlr, &$sqlc)
                         </ul>
                     </div>
                     <div id="tab_content">
-                        <table class="top_hidden" style="width: 720px">';
+                        <table class="top_hidden">';
     if($developer_test_mode && $multi_realm_mode)
     {
         $realms = $sqlr->query('SELECT count(*) FROM realmlist');
@@ -126,7 +126,7 @@ function top100($realmid, &$sqlr, &$sqlc)
 
     //==========================top tage navigaion ENDS here ========================
     $output .= '
-                        <table class="lined" style="width: 720px">
+                        <table class="lined">
                             <tr>
                                 <th width="5%">#</th>
                                 <th width="14%">'.$lang_top['name'].'</th>
@@ -264,7 +264,7 @@ function top100($realmid, &$sqlr, &$sqlc)
     }
     $output .= '
                         </table>
-                        <table class="top_hidden" style="width: 720px">
+                        <table class="top_hidden">
                             <tr>
                                 <td align="right">Total: '.$all_record.'</td>
                                 <td align="right" width="25%">';

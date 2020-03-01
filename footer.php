@@ -38,7 +38,8 @@
     $output .= '
                 <!-- start of footer.php -->
                 </div>
-                <div id="body_buttom">';
+                <div class="main_bottom">';
+    
     // show login and register button at bottom of every page if guest mode is activated
     if($allow_anony && empty($_SESSION['logged_in']))
     {
@@ -58,11 +59,6 @@
         unset($lang_login);
         unset($allow_anony);
     }
-    $output .= '
-                    <table class="table_buttom">
-                        <tr>
-                            <td class="table_buttom_left"></td>
-                            <td class="table_buttom_middle">';
 
     $lang_footer = lang_footer();
     $output .=
@@ -70,35 +66,62 @@
     unset($lang_footer);
     unset($admin_mail);
     $output .= sprintf('
-                                Execute time: %.5f', (microtime(true) - $time_start));
+                        Execute time: %.5f', (microtime(true) - $time_start));
     unset($time_start);
 
     // if any debug mode is activated, show memory usage
     if($debug)
     {
         $output .= '
-                                Queries: '.$tot_queries.' on '.$_SERVER['SERVER_SOFTWARE'];
+                        Queries: '.$tot_queries.' on '.$_SERVER['SERVER_SOFTWARE'];
         unset($tot_queries);
         if (function_exists('memory_get_usage'))
             $output .= sprintf('
-                                <br />Mem. Usage: %.0f/%.0fK Peek: %.0f/%.0fK Global: %.0fK Limit: %s',memory_get_usage()/1024, memory_get_usage(true)/1024,memory_get_peak_usage()/1024,memory_get_peak_usage(true)/1024,sizeof($GLOBALS),ini_get('memory_limit'));
+                        <br />Mem. Usage: %.0f/%.0fK Peek: %.0f/%.0fK Global: %.0fK Limit: %s',memory_get_usage()/1024, memory_get_usage(true)/1024,memory_get_peak_usage()/1024,memory_get_peak_usage(true)/1024,sizeof($GLOBALS),ini_get('memory_limit'));
     }
 
     // links at footer
     $output .= '
-                                <p>
-                                    <a href="https://www.trinitycore.org/" target="_blank"><img src="img/logo-trinity.png" class="logo_border" alt="trinity" /></a>
-                                    <a href="https://www.php.net/" target="_blank"><img src="img/logo-php.png" class="logo_border" alt="php" /></a>
-                                    <a href="https://www.mysql.com/" target="_blank"><img src="img/logo-mysql.png" class="logo_border" alt="mysql" /></a>
-                                    <a href="https://validator.w3.org/check?uri=referer" target="_blank"><img src="img/logo-css.png" class="logo_border" alt="w3" /></a>
-                                    <a href="https://www.spreadfirefox.com" target="_blank"><img src="img/logo-firefox.png" class="logo_border" alt="firefox" /></a>
-                                    <a href="https://www.opera.com/" target="_blank"><img src="img/logo-opera.png" class="logo_border" alt="opera" /></a>
-                                </p>
-                            </td>
-                            <td class="table_buttom_right"></td>
-                        </tr>
-                    </table>
+                        <p>
+                            <a href="https://www.trinitycore.org/" target="_blank"><img src="img/logo-trinity.png" class="logo_border" alt="trinity" /></a>
+                            <a href="https://www.php.net/" target="_blank"><img src="img/logo-php.png" class="logo_border" alt="php" /></a>
+                            <a href="https://www.mysql.com/" target="_blank"><img src="img/logo-mysql.png" class="logo_border" alt="mysql" /></a>
+                            <a href="https://validator.w3.org/check?uri=referer" target="_blank"><img src="img/logo-css.png" class="logo_border" alt="w3" /></a>
+                            <a href="https://www.spreadfirefox.com" target="_blank"><img src="img/logo-firefox.png" class="logo_border" alt="firefox" /></a>
+                            <a href="https://www.opera.com/" target="_blank"><img src="img/logo-opera.png" class="logo_border" alt="opera" /></a>
+                        </p>
+                    </div>
                     <br />';
+
+        //---------------------Version Information-------------------------------------
+    if ( $show_version['show'] && $user_lvl >= $show_version['version_lvl'] )
+    {
+        if ((1 < $show_version['show']) && $user_lvl >= $show_version['svnrev_lvl'])
+        {
+            $show_version['svnrev'] = '';
+            // if file exists and readable
+            if (is_readable('.svn/entries'))
+            {
+                $file_obj = new SplFileObject('.svn/entries');
+                // line 4 is where svn revision is stored
+                $file_obj->seek(3);
+                $show_version['svnrev'] = $file_obj->current();
+                unset($file_obj);
+            }
+            $output .= '
+            <div id="version">
+                '.$show_version['version'].' r'.$show_version['svnrev'].'
+            </div>';
+        }
+        else
+        {
+            $output .= '
+            <div id="version">
+                '.$show_version['version'].'
+            </div>';
+        }
+    }
+
     echo $output;
     unset($output);
     // we need to close $output before we start debug mode 3 or higher
@@ -134,6 +157,8 @@
                         </tr>
                     <table>';
     }
+
+
 
 ?>
 

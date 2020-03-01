@@ -338,7 +338,7 @@ $query .= "0) GROUP BY account);";
                 $avatars[$post[1]]["gm"]);
             else
               $avatar = "";
-            $output .= "<tr><td style=\"width:15%;text-align:center;\"><center>$avatar</center>{$forum_lang["author"]} : ";
+            $output .= "<tr><td style=\"width:15%;text-align:center;vertical-align: top;\"><center>$avatar</center>{$forum_lang["author"]} : ";
             if($user_lvl > 0)
               $output .= "<a href=\"user.php?action=edit_user&error=11&id={$post[1]}\">";
             if(isset($avatars[$post[1]]))
@@ -419,7 +419,7 @@ $query .= "0) GROUP BY account);";
         <a href=\"javascript:ajtBBCode('[quote=Someone]','[/quote]')\">{$forum_lang["quote2"]}</a>,
         <a href=\"javascript:ajtBBCode('[media]','[/media]')\">{$forum_lang["media"]}</a>
                 <a href=\"javascript:ajtBBCode('[youtube]','[/youtube]')\">{$forum_lang["YouTube"]}</a>
-        {$forum_lang["color"]} : <select name=\"fontcolor\" onChange=\"ajtBBCode('[color=' + this.form.fontcolor.options[this.form.fontcolor.selectedIndex].value + ']', '[/color]'); this.selectedIndex=0;\" onMouseOver=\"helpline('fontcolor')\" style=\"background-color:#D7D7D7\">
+        {$forum_lang["color"]} : <select name=\"fontcolor\" onChange=\"ajtBBCode('[color=' + this.form.fontcolor.options[this.form.fontcolor.selectedIndex].value + ']', '[/color]'); this.selectedIndex=0;\" onMouseOver=\"helpline('fontcolor')\">
           <option value=\"black\" style=\"color:black\">Black</option>
           <option value=\"silver\" style=\"color:silver\">Silver</option>
           <option value=\"gray\" style=\"color:gray\">Gray</option>
@@ -729,7 +729,7 @@ function forum_add_topic(){
         <a href=\"javascript:ajtBBCode('[quote=Someone]','[/quote]')\">{$forum_lang["quote2"]}</a>,
         <a href=\"javascript:ajtBBCode('[media]','[/media]')\">{$forum_lang["media"]}</a>
                 <a href=\"javascript:ajtBBCode('[youtube]','[/youtube]')\">{$forum_lang["YouTube"]}</a>
-        {$forum_lang["color"]} : <select name=\"fontcolor\" onChange=\"ajtBBCode('[color=' + this.form.fontcolor.options[this.form.fontcolor.selectedIndex].value + ']', '[/color]'); this.selectedIndex=0;\" onMouseOver=\"helpline('fontcolor')\" style=\"background-color:#D7D7D7\">
+        {$forum_lang["color"]} : <select name=\"fontcolor\" onChange=\"ajtBBCode('[color=' + this.form.fontcolor.options[this.form.fontcolor.selectedIndex].value + ']', '[/color]'); this.selectedIndex=0;\" onMouseOver=\"helpline('fontcolor')\">
           <option value=\"black\" style=\"color:black\">Black</option>
           <option value=\"silver\" style=\"color:silver\">Silver</option>
           <option value=\"gray\" style=\"color:gray\">Gray</option>
@@ -1005,7 +1005,7 @@ function forum_edit_post(){
         <a href=\"javascript:ajtBBCode('[quote=Someone]','[/quote]')\">{$forum_lang["quote2"]}</a>,
         <a href=\"javascript:ajtBBCode('[media]','[/media]')\">{$forum_lang["media"]}</a>
                 <a href=\"javascript:ajtBBCode('[youtube]','[/youtube]')\">{$forum_lang["YouTube"]}</a>
-        {$forum_lang["color"]} : <select name=\"fontcolor\" onChange=\"ajtBBCode('[color=' + this.form.fontcolor.options[this.form.fontcolor.selectedIndex].value + ']', '[/color]'); this.selectedIndex=0;\" onMouseOver=\"helpline('fontcolor')\" style=\"background-color:#D7D7D7\">
+        {$forum_lang["color"]} : <select name=\"fontcolor\" onChange=\"ajtBBCode('[color=' + this.form.fontcolor.options[this.form.fontcolor.selectedIndex].value + ']', '[/color]'); this.selectedIndex=0;\" onMouseOver=\"helpline('fontcolor')\">
           <option value=\"black\" style=\"color:black\">Black</option>
           <option value=\"silver\" style=\"color:silver\">Silver</option>
           <option value=\"gray\" style=\"color:gray\">Gray</option>

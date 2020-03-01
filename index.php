@@ -19,7 +19,8 @@ function front(&$sqlr, &$sqlc, &$sqlm)
             $showcountryflag, $motd_display_poster, $gm_online_count, $gm_online, $itemperpage;
 
     $output .= '
-                <div class="top">';
+                <div class="top">
+                    <div id="uptime">';
 
     if (test_port($server[$realm_id]['addr'],$server[$realm_id]['game_port']))
     {
@@ -58,24 +59,20 @@ function front(&$sqlr, &$sqlc, &$sqlm)
             return $uptimeString;
         }
 
-        $staticUptime = $lang_index['realm'].' <em>'.htmlentities(get_realm_name($realm_id)).'</em> '.$lang_index['online'].' for '.format_uptime($uptimetime);
+        $staticUptime = $lang_index['realm'].': '.htmlentities(get_realm_name($realm_id)).'<br /> '.$lang_index['uptime'].': <font color="#55aa55">'.format_uptime($uptimetime).'</font>';
         unset($uptimetime);
         $output .= '
-                    <div id="uptime">
-                        <h1>
-                            <font color="#55aa55">'.$staticUptime.'<br />'.$lang_index['maxplayers'].': '.$stats['maxplayers'].'</font>
-                        </h1>
-                    </div>';
+                        '.$staticUptime.'<br />'.$lang_index['maxplayers'].': '.$stats['maxplayers'].'
+                    ';
         unset($staticUptime);
         unset($stats);
+
         $online = true;
     }
     else
     {
         $output .= '
-                    <h1>
-                        <font class="error">'.$lang_index['realm'].' <em>'.htmlentities(get_realm_name($realm_id)).'</em> '.$lang_index['offline_or_let_high'].'</font>
-                    </h1>';
+                        '.$lang_index['realm'].': '.htmlentities(get_realm_name($realm_id)).'<br />'.$lang_index['uptime'].': <font class="error"> '.$lang_index['offline_or_let_high'].'</font>';
         $online = false;
     }
 
@@ -85,8 +82,9 @@ function front(&$sqlr, &$sqlc, &$sqlm)
     //  This retrieves the actual database version from the database itself, instead of hardcoding it into a string
     $version = $sqlw->fetch_assoc($sqlw->query('SELECT core_revision, db_version FROM version'), 0);
     $output .= '
-                    '.$lang_index['trinity_rev'].' '.$version['core_revision'].' '.$lang_index['using_db'].' '.$version['db_version'].'
-                </div>';
+                    <br />'.$lang_index['trinity_rev'].' '.$version['core_revision'].'<br />'.$lang_index['using_db'].' '.$version['db_version'].'
+                </div>
+            </div>';
     unset($version);
 
     //MOTD part
@@ -272,10 +270,10 @@ function front(&$sqlr, &$sqlc, &$sqlm)
             $output .= '
                             </td>
                             <td>
-                                <img src="img/c_icons/'.$char['race'].'-'.$char['gender'].'.gif" onmousemove="toolTip(\''.char_get_race_name($char['race']).'\', \'item_tooltip\')" onmouseout="toolTip()" alt="" />
+                                <img class="char-icon" src="img/c_icons/'.$char['race'].'-'.$char['gender'].'.gif" onmousemove="toolTip(\''.char_get_race_name($char['race']).'\', \'item_tooltip\')" onmouseout="toolTip()" alt="" />
                             </td>
                             <td>
-                                <img src="img/c_icons/'.$char['class'].'.gif" onmousemove="toolTip(\''.char_get_class_name($char['class']).'\', \'item_tooltip\')" onmouseout="toolTip()" alt="" />
+                                <img class="char-icon" src="img/c_icons/'.$char['class'].'.gif" onmousemove="toolTip(\''.char_get_class_name($char['class']).'\', \'item_tooltip\')" onmouseout="toolTip()" alt="" />
                             </td>
                             <td>'.char_get_level_color($char['level']).'</td>
                             <td>

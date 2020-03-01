@@ -57,7 +57,7 @@ unset($sqlm);
 //---------------------Loading User Theme and Language Settings----------------
 if (isset($_COOKIE['theme']))
     if (is_dir('themes/'.$_COOKIE['theme']))
-        if (is_file('themes/'.$_COOKIE['theme'].'/'.$_COOKIE['theme'].'_1024.css'))
+        if (is_file('themes/'.$_COOKIE['theme'].'/'.$_COOKIE['theme'].'.css'))
             $theme = $_COOKIE['theme'];
 
 if (isset($_COOKIE['lang']))
@@ -69,6 +69,10 @@ if (isset($_COOKIE['lang']))
 }
 else
     $lang = $language;
+
+// Add more memory to PHP if needed by MM
+    if (ini_get('memory_limit') < 16)
+        @ini_set('memory_limit', '16M');
 
 //---------------------Loading Libraries---------------------------------------
 require_once 'lang/'.$lang.'.php';
@@ -89,6 +93,7 @@ header('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT');
 header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
 header('Cache-Control: post-check=0, pre-check=0', false);
 header('Pragma: no-cache');
+
 $output .= '
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="https://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -96,8 +101,7 @@ $output .= '
         <title>'.$title.'</title>
         <meta http-equiv="Content-Type" content="text/html; charset='.$site_encoding.'" />
         <meta http-equiv="Content-Type" content="text/javascript; charset='.$site_encoding.'" />
-        <link rel="stylesheet" type="text/css" href="themes/'.$theme.'/'.$theme.'_1024.css" title="1024" />
-        <link rel="stylesheet" type="text/css" href="themes/'.$theme.'/'.$theme.'_1280.css" title="1280" />
+        <link rel="stylesheet" type="text/css" href="themes/'.$theme.'/'.$theme.'.css" />
         <link rel="SHORTCUT ICON" href="img/favicon.ico" />
         <script type="text/javascript" charset="utf-8"></script>
         <script type="text/javascript" src="libs/js/general.js"></script>
@@ -106,14 +110,9 @@ $output .= '
 
     <body onload="dynamicLayout();">
         <center>
-            <table class="table_top">
-                <tr>
-                    <td class="table_top_left" valign="top">';
-unset($title);
+            <div class="main_top">';
 
-// Add more memory to PHP if needed by MM
-    if (ini_get('memory_limit') < 16)
-        @ini_set('memory_limit', '16M');
+unset($title);
 
 //---------------------Guest login Predefines----------------------------------
 if ($allow_anony && empty($_SESSION['logged_in']))
@@ -151,10 +150,15 @@ if (isset($_SESSION['user_lvl']) && isset($_SESSION['uname']) && isset($_SESSION
     unset($array);
 
     //---------------------Top Menu----------------------------------------------
-    $output .= '
-                    <div id="menuwrapper">
-                        <ul id="menubar">';
     $lang_header = lang_header();
+    $output .= '
+                <div class="main_top_right">
+                    <div id="username">'.$lang_header['username'].': '.$user_name.'</div>
+                    <div id="rank">'.$lang_header['rank'].': '.$user_lvl_name.'</div>
+                </div>
+                <div id="menuwrapper">
+                    <ul id="menubar">';
+
     $action_permission = array();
     foreach ($menu_array as $trunk)
     {
@@ -176,10 +180,10 @@ if (isset($_SESSION['user_lvl']) && isset($_SESSION['uname']) && isset($_SESSION
         else
         {
             $output .= '
-                            <li><a href="'.$trunk[0].'">'.(isset($lang_header[$trunk[1]]) ? $lang_header[$trunk[1]] : $trunk[1]).'</a>';
+                        <li><a href="'.$trunk[0].'">'.(isset($lang_header[$trunk[1]]) ? $lang_header[$trunk[1]] : $trunk[1]).'</a>';
             if(isset($trunk[2][0]))
                 $output .= '
-                    <ul>';
+                            <ul>';
             foreach ($trunk[2] as $branch)
             {
                 if($branch[0] === $lookup_file)
@@ -195,10 +199,10 @@ if (isset($_SESSION['user_lvl']) && isset($_SESSION['uname']) && isset($_SESSION
             }
             if(isset($trunk[2][0]))
                 $output .= '
-                        </ul>';
+                            </ul>';
 
             $output .= '
-                    </li>';
+                        </li>';
         }
     }
     unset($branch);
@@ -207,8 +211,8 @@ if (isset($_SESSION['user_lvl']) && isset($_SESSION['uname']) && isset($_SESSION
     unset($menu_array);
 
     $output .= '
-                            <li><a href="edit.php">'.$lang_header['my_acc'].'</a>
-                        <ul>';
+                        <li><a href="edit.php">'.$lang_header['my_acc'].'</a>
+                            <ul>';
 
     $result = $sqlr->query('SELECT id, name FROM `realmlist` LIMIT 10');
 
@@ -216,14 +220,14 @@ if (isset($_SESSION['user_lvl']) && isset($_SESSION['uname']) && isset($_SESSION
     if ((1 < $sqlr->num_rows($result)) && (1 < count($server)) && (1 < count($characters_db)))
     {
         $output .= '
-                            <li><a href="#">'.$lang_header['realms'].'</a></li>';
+                                <li><a href="#">'.$lang_header['realms'].'</a></li>';
         while ($realm = $sqlr->fetch_assoc($result))
         {
             if(isset($server[$realm['id']]))
             {
                 $set = ($realm_id === $realm['id']) ? '>' : '';
                 $output .= '
-                            <li><a href="realm.php?action=set_def_realm&amp;id='.$realm['id'].'&amp;url='.$_SERVER['PHP_SELF'].'">'.htmlentities($set.' '.$realm['name']).'</a></li>';
+                                <li><a href="realm.php?action=set_def_realm&amp;id='.$realm['id'].'&amp;url='.$_SERVER['PHP_SELF'].'">'.htmlentities($set.' '.$realm['name']).'</a></li>';
             }
         }
         unset($set);
@@ -238,9 +242,9 @@ if (isset($_SESSION['user_lvl']) && isset($_SESSION['uname']) && isset($_SESSION
     {
         $lang_login = lang_login();
         $output .= '
-                            <li><a href="#">'.$lang_header['account'].'</a></li>
-                            <li><a href="register.php">'.$lang_login['not_registrated'].'</a></li>
-                            <li><a href="login.php">'.$lang_login['login'].'</a></li>';
+                                <li><a href="#">'.$lang_header['account'].'</a></li>
+                                <li><a href="register.php">'.$lang_login['not_registrated'].'</a></li>
+                                <li><a href="login.php">'.$lang_login['login'].'</a></li>';
         unset($lang_login);
     }
     else
@@ -253,78 +257,34 @@ if (isset($_SESSION['user_lvl']) && isset($_SESSION['uname']) && isset($_SESSION
         if($sqlc->num_rows($result))
         {
             $output .= '
-                            <li><a href="#">'.$lang_header['my_characters'].'</a></li>';
+                                <li><a href="#" class="section-title">'.$lang_header['my_characters'].'</a></li>';
             while ($char = $sqlc->fetch_assoc($result))
             {
                 $output .= '
-                            <li>
-                                <a href="char.php?id='.$char['guid'].'">
-                                <img src="img/c_icons/'.$char['race'].'-'.$char['gender'].'.gif" alt="" /><img src="img/c_icons/'.$char['class'].'.gif" alt="" />'.
-                                $char['name'].'
-                                </a>
-                            </li>';
+                                <li>
+                                    <a href="char.php?id='.$char['guid'].'">
+                                    <img class="menu-char-icon" src="img/c_icons/'.$char['race'].'-'.$char['gender'].'.gif" alt="" /><img class="menu-char-icon" src="img/c_icons/'.$char['class'].'.gif" alt="" />'.
+                                    $char['name'].'
+                                    </a>
+                                </li>';
             }
             unset($char);
         }
         $output .= '
-                            <li><a href="#">'.$lang_header['account'].'</a></li>
-                            <li><a href="edit.php">'.$lang_header['edit_my_acc'].'</a></li>
-                            <li><a href="logout.php">'.$lang_header['logout'].'</a></li>';
+                                <li><a href="#" class="section-title">'.$lang_header['account'].'</a></li>
+                                <li><a href="edit.php">'.$lang_header['edit_my_acc'].'</a></li>
+                                <li><a href="logout.php">'.$lang_header['logout'].'</a></li>';
     }
     unset($result);
 
     $output .= '
-                        </ul>
-                    </li>
+                            </ul>
+                        </li>
                     </ul>
-                    <br class="clearit" />
-                    </div>
-                    </td>
-                    <td class="table_top_middle">
-                        <div id="username">'.$user_name.' .:'.$user_lvl_name.'\'s '.$lang_header['menu'].':.</div>
-                    </td>
-                    <td class="table_top_right"></td>
-                </tr>
-            </table>';
-    unset($lang_header);
+                </div>
+            </div>';
 
-    //---------------------Version Information-------------------------------------
-    if ( $show_version['show'] && $user_lvl >= $show_version['version_lvl'] )
-    {
-        if ((1 < $show_version['show']) && $user_lvl >= $show_version['svnrev_lvl'])
-        {
-            $show_version['svnrev'] = '';
-            // if file exists and readable
-            if (is_readable('.svn/entries'))
-            {
-                $file_obj = new SplFileObject('.svn/entries');
-                // line 4 is where svn revision is stored
-                $file_obj->seek(3);
-                $show_version['svnrev'] = $file_obj->current();
-                unset($file_obj);
-            }
-            $output .= '
-        <div id="version">
-            '.$show_version['version'].' r'.$show_version['svnrev'].'
-        </div>';
-        }
-        else
-        {
-            $output .= '
-        <div id="version">
-            '.$show_version['version'].'
-        </div>';
-        }
-    }
-}
-else
-{
-    $output .= '
-                    </td>
-                    <td class="table_top_middle"></td>
-                    <td class="table_top_right"></td>
-                </tr>
-            </table>';
+    unset($lang_header);
 }
 
 //---------------------Start of Body-------------------------------------------

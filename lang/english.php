@@ -199,7 +199,7 @@ function lang_index()
   $lang_index = array
   (
     'realm' => 'Realm',
-    'online' => 'Online',
+    'uptime' => 'Uptime',
     'offline_or_let_high' => 'Offline or Latency too High',
     'add_motd' => 'Add Message of the Day',
     'delete' => 'Delete',
@@ -236,6 +236,8 @@ function lang_header()
     'system' => 'System',
     'support' => 'Support',
     'my_acc' => 'My Account',
+    'username' => 'Username',
+    'rank' => 'Rank',
 
     'auctionhouse' => 'Auction House',
     'arena_teams' => 'Arena Teams',
@@ -273,9 +275,9 @@ function lang_header()
     'irc' => 'IRC Applet',
 
     // please check the length at 'My Account' Menu
-    'realms' => '------Realms------',
-    'my_characters' => '----Characters----',
-    'account' => '------Account-----',
+    'realms' => 'Realms',
+    'my_characters' => 'Characters',
+    'account' => 'Account',
     'edit_my_acc' => 'Edit My Account',
     'logout' => 'Logout',
   );
